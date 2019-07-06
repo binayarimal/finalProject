@@ -1,0 +1,39 @@
+{
+  "name": "shopping-cart-express",
+  "version": "1.0.0",
+  "description": "a shopping-cart app form families to add, delete and check off shopping items",
+  "main": "index.js",
+  "scripts": {
+    "test": "set NODE_ENV=test&& jasmine",
+    "start": "node src/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "request": "^2.88.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "concurrently": "^4.1.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^5.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "react-router-dom": "^5.0.1",
+    "sequelize": "^4.32.6",
+    "sequelize-cli": "^5.5.0",
+    "socket.io": "^2.2.0"
+  }
+}
