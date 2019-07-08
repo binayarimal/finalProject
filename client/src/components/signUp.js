@@ -31,7 +31,7 @@ import React, { Component } from 'react';
      }
    render() {
      return (
-      <form  onSubmit = {(e)=>this.signUp(e)}>
+      <form className = "eform"  onSubmit = {(e)=>this.signUp(e)}>
         <div >
           <label>Email</label>
           <input

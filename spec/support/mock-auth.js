@@ -5,22 +5,18 @@ module.exports = {
 
     let  id, email;
 
-// #3
     function middleware(req,res,next){
+      id = req.query.userId || id;
+      email = req.query.email || email;
+    
 
-// #4
-
-      id = req.body.userId || id;
-      email = req.body.email || email;
-      console.log(req.body)
-// #5
       if(id && id != 0){
         req.user = {
           "id": id,
           "email": email,
 
         };
-        console.log(req.user)
+
       } else if(id == 0) {
         delete req.user;
       }
@@ -33,7 +29,7 @@ module.exports = {
       res.redirect("/")
     }
 
-
+    app.use(middleware)
     app.get("/auth/fake", route)
   }
 }

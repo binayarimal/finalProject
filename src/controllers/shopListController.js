@@ -3,7 +3,7 @@ const shopListQueries = require("../db/Queries.shopList.js");
 const authoroties = require("../authoroties.js")
 module.exports = {
   show (req, res, next){
-  
+
     const authorized = new authoroties(req.user). _isLoggedIn();
     if(authorized){
     shopListQueries.getAllShopLists(req.user.id, (err, shopLists)=>{
@@ -23,6 +23,7 @@ module.exports = {
 
     const authorized = new authoroties(req.user). _isLoggedIn();
     if(authorized){
+      console.log("user",req.user);
       let newShopList = {
         name: req.body.name,
         description:req.body.description,
@@ -35,6 +36,7 @@ module.exports = {
           console.log(req.user)
         } else {
           res.sendStatus(200);
+          console.log(res.status)
         }
       })
     } else {

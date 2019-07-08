@@ -8,6 +8,7 @@ const history = require('connect-history-api-fallback');
 const socketIo = require('socket.io');
 const itemQueries = require('./db/Queries.items.js')
 const io = socketIo(server);
+app.use(history());
 app.set('socketio', io);
 io.on('connection', socket => {
   console.log("user connected")
@@ -35,8 +36,6 @@ io.on('connection', socket => {
     })
 
   })
-
-
   socket.on('disconnect', () => {
     console.log('user disconnected')
   })
@@ -50,7 +49,6 @@ if(process.env.NODE_ENV === 'production'){
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
 function normalizePort(val) {
   const port = parseInt(val, 10);
   if (isNaN(port)) {
@@ -61,9 +59,6 @@ function normalizePort(val) {
   }
   return false;
 }
-
-
-
 server.on("listening", () => {
   console.log(`server is listening for requests on port ${server.address().port}`);
 });

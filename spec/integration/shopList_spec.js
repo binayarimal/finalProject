@@ -3,88 +3,92 @@ const server = require("../../src/server");
 const base = "http://localhost:5000/shopList";
 const sequelize = require("../../src/db/models/index").sequelize;
 const ShopList = require("../../src/db/models").ShopList;
-const User = require("../../src/db/models").User;
+const User =require("../../src/db/models").User;
 
 
-describe("routes : shopList", () => {
 
+describe("routes : posts", () => {
   beforeEach((done) => {
-  this.shopList;
-  this.user;
-  sequelize.sync({force: true}).then((res) => {
-    User.create({
-      email: "starman@tesla.com",
-      password: "shopper4lyfe"
-    })
-    .then((user) => {
-      this.user = user;
-
-      ShopList.create({
-        name: "Games",
-        description: "Post your Winter Games stories.",
-        userId:this.user.id
+    this.shoplist;
+    this.user;
+    sequelize.sync({force: true}).then((res) => {
+      User.create({
+        email: "starman@tesla.com",
+        password: "Trekkie4lyfe"
       })
-      .then((shopList) => {
-        this.shopList = shopList;
+      .then((user) => {
+        this.user = user;
 
-        done();
+        ShopList.create({
+          name: "Winter Games",
+          description: "Post your Winter Games stories.",
+          userId:user.id
+
+        })
+        .then((shopList) => {
+          this.shoplist = shopList;
+          done();
+        })
       })
-    })
+    });
   });
-});
 
 
 
-  describe("admin user performing CRUD actions for Post", () => {
-    beforeEach((done) => {
-       User.create({
-         email: "admin@example.com",
-         password: "123456",
 
-       })
-       .then((user) => {
-         request.get({
-           url: "http://localhost:5000/auth/fake",
-           form: {
+  describe("User performing CRUD actions for Post", () => {
+  beforeAll((done) => {
+      User.create({
+        email: "admin@example.com",
+        password: "123456",
 
-             userId: user.id,
-             email: user.email
-           }
-         },
-           (err, res, body) => {
-             done();
-           }
-         );
-       });
-     });
-describe("POST /shopList/:shopListId/create", () => {
+      })
+      .then((user) => {
+        request.get({         // mock authentication
+          url: `http://localhost:5000/auth/fake?userId=${user.id}&email=${user.email}`
 
-  it("should create a new post and redirect", (done) => {
-      const options = {
-        url: `${base}/create`,
-        form: {
-          name: "love",
-          description: "Post your Winter Games stories."
-        }
-      };
-      request.post(options,
+        },
         (err, res, body) => {
-          console.log(body)
-          ShopList.findOne({where: {name: "love"}})
-          .then((post) => {
-            expect(post.name).toBe("love");
-            expect(post.description).toBe("Post your Winter Games stories.");
+          console.log("err",err);
+          console.log("res",res.status)
+          done();
+        }
+      );
+    });
+  });
+
+  describe("POST /topics/:topicId/posts/create", () => {
+
+    it("should create a new post and redirect", (done) => {
+
+
+
+
+      request.post( { url: `${base}/create?name=${"cars"}&description=${"ferrari"}`
+    },
+        (err, res, body) => {
+
+          ShopList.findOne({where: {name: "cars"}})
+          .then((sl) => {
+            expect(sl).not.toBeNull();
+            expect(sl.name).toBe("cars");
+            expect(sl.description).toBe("ferrari");
+
             done();
           })
           .catch((err) => {
-             console.log(err)
+            console.log(err);
             done();
           });
         }
       );
     });
 
-});
+  });
 
-})
-});
+
+
+
+    })
+
+  })

@@ -9,7 +9,7 @@ class Items extends Component {
       item :"",
       itemList:[],
       email:"",
-      endpoint : "https://binayarimal-bloc-shopping-cart.herokuapp.com/"
+      endpoint : "https://binayarimal-bloc-shopping-cart.herokuapp.com"
     }
   }
  setItemList(items){
@@ -32,7 +32,8 @@ class Items extends Component {
     };
     socket.emit('post items', data);
     socket.on('success', (items) => {
-      this.componentDidMount()
+      this.componentDidMount();
+      this.setState({item:""})
           });
     }
     statusHandler(e, item){
@@ -54,7 +55,10 @@ class Items extends Component {
         e.preventDefault();
           let body = {email:this.state.email};
         axios.post(`/shopList/${this.props.match.params.id}/collab`, body)
-        .then( res => this.componentDidMount() )
+        .then( (res)=> {
+          this.componentDidMount();
+          this.setState({email:""})
+        })
         .catch(err => console.log(err));
     }
     deleteHandler(e, itemId){
@@ -68,6 +72,7 @@ class Items extends Component {
       return (
         <div className = "container">
         <section>
+
         <form onSubmit = {(e)=>this.submitHandler(e)}>
         <input
         type="text"
@@ -82,8 +87,8 @@ class Items extends Component {
         {this.state.itemList.map((item,index) =>
           <li className="list-group-item" key = {index}>
             {item.title}
-              <button className="btn btn-primary float-right" onClick = {(e)=>this.deleteHandler(e,item.id)}>delete</button>
-              <button className="btn btn-primary float-right" onClick  = {(e)=>this.statusHandler(e,item)}>{item.status}</button>
+              <button className="button btn btn-primary float-right" onClick = {(e)=>this.deleteHandler(e,item.id)}>delete</button>
+              <button className=" button btn float-right" onClick  = {(e)=>this.statusHandler(e,item)}>{item.status}</button>
           </li>
 
         )}

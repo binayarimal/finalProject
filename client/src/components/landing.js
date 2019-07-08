@@ -7,6 +7,8 @@ const Landing = () => (
 
        <div className="hero-title">
        <h1 className="mainTitle">Shop with ease</h1>
+       <p className = "shopcart"></p>
+
     </div>
 
     </div>
