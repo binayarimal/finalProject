@@ -32,23 +32,5 @@ module.exports = {
             callback(err);
           })
         },
-        deleteCollab(req, callback){
-          return  Collaborator.findOne(
-            {where:
-              {email:req.body.Collaborator,
-                shopListId:req.params.id}
-              }
-            )
-            .then((collab)=>{
-              collab.destroy()
-              .then (()=>{
-                callback(null)
-              })
-
-            })
-            .catch((err)=>{
-              callback(err)
-            })
-          },
-
+      
         }

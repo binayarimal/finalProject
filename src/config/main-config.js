@@ -13,9 +13,11 @@ const viewsFolder = path.join(__dirname, "..", "public");
     app.set("views", viewsFolder);
     app.set("view engine", "ejs");
     app.use(express.static(path.join(__dirname, "..", "assets")));
-    app.use(bodyParser.json());
-
-
+  if(process.env.NODE_ENV === "test"){
+    app.use(bodyParser.urlencoded({ extended: true }))
+  }  else{
+    app.use(bodyParser.json())
+  };
     app.use(session({
       secret: process.env.cookieSecret,
       resave: false,
@@ -23,7 +25,6 @@ const viewsFolder = path.join(__dirname, "..", "public");
       cookie: { maxAge: 1.21e+9 } //set cookie to expire in 14 days
     }));
     if(process.env.NODE_ENV === "test") {
-      console.log(process.env.NODE_ENV);
       const mockAuth = require("../../spec/support/mock-auth.js");
       mockAuth.fakeIt(app);
     };

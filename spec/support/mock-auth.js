@@ -8,12 +8,14 @@ module.exports = {
     function middleware(req,res,next){
       id = req.query.userId || id;
       email = req.query.email || email;
-    
+
+
 
       if(id && id != 0){
         req.user = {
           "id": id,
           "email": email,
+        
 
         };
 

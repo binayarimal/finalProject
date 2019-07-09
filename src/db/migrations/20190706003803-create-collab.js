@@ -10,7 +10,7 @@ module.exports = {
       },
       email:{
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       shopListId: {
         type: Sequelize.INTEGER,

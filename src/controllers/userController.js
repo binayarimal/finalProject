@@ -1,6 +1,6 @@
 const userQueries = require("../db/Queries.user.js");
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
+
 module.exports = {
   create(req, res, next){
     let newUser = {
