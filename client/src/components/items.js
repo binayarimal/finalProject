@@ -16,11 +16,13 @@ class Items extends Component {
     this.setState({itemList:items})
   }
   componentDidMount(){
+    if (localStorage.user){
     const socket = io(this.state.endpoint);
     socket.emit('give items', this.props.match.params.id);
     socket.on('show items', (items) => {
       this.setItemList(items)
-    });
+    })
+  } else {this.props.history.push("/")}
   }
   submitHandler(e){
     const socket = io(this.state.endpoint);
@@ -57,7 +59,7 @@ class Items extends Component {
     axios.post(`/shopList/${this.props.match.params.id}/collab`, body)
     .then( (res) => {
        this.componentDidMount();
-       this.setState({email:""})})
+       this.setState({email:""}) })
     .catch(err => console.log(err));
   }
   deleteHandler(e, itemId){

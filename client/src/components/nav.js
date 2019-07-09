@@ -17,7 +17,8 @@ class Nav extends Component {
     .then( () => {
       localStorage.removeItem('user');
       this.setState({user:null});
-      window.location.reload()
+      window.location.reload();
+    
     })
     .catch(err => console.log(err));
   }
