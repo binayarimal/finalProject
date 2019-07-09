@@ -40,8 +40,9 @@ io.on('connection', socket => {
     console.log('user disconnected')
   })
 });
-app.use(history());
+
 app.set("port", port);
+
 server.listen(port);
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static( "client/build"));
