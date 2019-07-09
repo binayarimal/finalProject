@@ -9,7 +9,7 @@ class Items extends Component {
       item :"",
       itemList:[],
       email:"",
-      endpoint : "http://localhost:5000"
+      endpoint : "https://binayarimal-bloc-shopping-cart.herokuapp.com/"
     }
   }
  setItemList(items){
@@ -19,7 +19,6 @@ class Items extends Component {
     const socket = io(this.state.endpoint);
     socket.emit('give items', this.props.match.params.id);
     socket.on('show items', (items) => {
-        console.log(items);
         this.setItemList(items)
           });
   }
