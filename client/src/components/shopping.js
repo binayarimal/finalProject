@@ -59,7 +59,7 @@ class ShopList extends Component {
            <li key = {index} className="list-group-item">
             <Link  to = {`/ShopList/${list.id}`} >{list.name}</Link>
             <button onClick = {(e)=>this.deleteHandler(e,list.id)} className=" button btn btn-danger float-right">delete</button>
-            <Link to = {`/ShopList/${list.id}/edit`}  class=" button btn btn-primary float-right">edit</Link>
+            <Link to = {`/ShopList/${list.id}/edit`}  className=" button btn btn-primary float-right">edit</Link>
 
            </li>
 

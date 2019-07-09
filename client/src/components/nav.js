@@ -28,7 +28,7 @@ class Nav extends Component {
         <li key = {3}>
         <Link className="nav-link" to= '/ShopList' >ShopList <span className="sr-only">(current)</span></Link>
         </li>,
-        <button className=" btn btn-danger float-left" onClick= {(e)=>this.signOut(e)}>Sign Out </button>
+        <button className=" btn btn-danger float-left" key = "signOut"onClick= {(e)=>this.signOut(e)}>Sign Out </button>
       ])
     } else{
       return ([<li key = {4}>

@@ -35,6 +35,36 @@ io.on('connection', socket => {
       }
     })
 
+  });
+  socket.on('mark items', (data) => {
+    itemQueries.mark(data.itemId, (err, item) =>{
+      if(err){
+        console.log(err)
+      } else{
+        const message ="success";
+        io.emit('success',message )
+      }
+    })
+  });
+  socket.on('un-mark items', (data) => {
+    itemQueries.unMark(data.itemId, (err, item) =>{
+      if(err){
+        console.log(err)
+      } else{
+        const message ="success";
+        io.emit('success',message )
+      }
+    })
+  })
+  socket.on('delete items', (data) => {
+    itemQueries.deleteItem(data, (err, item) =>{
+      if(err){
+        console.log(err)
+      } else{
+        const message ="success";
+        io.emit('success',message )
+      }
+    })
   })
   socket.on('disconnect', () => {
     console.log('user disconnected')
